@@ -1,11 +1,122 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title><%= title %> | Student Expense Tracker</title>
+ 
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+
+  <header>
+    <nav class="navbar">
+
+      <a href="/" class="logo">
+        <img
+          src="/images/studentwalletlogo.jpg"
+          alt="StudentWallet logo"
+          class="brand-logo"
+          >
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/expenses">Dashboard</a></li>
+        <li><a href="/expenses/new">Add Expense</a></li>
+      </ul>
+
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="hero">
+
+      <div class="hero-content">
+
+        <span class="hero-label">
+          Smart Money Management for Students
+        </span>
+
+        <h1>
+          Take Control of Your
+          <span>Student Spending</span>
+        </h1>
+
+        <p>
+          StudentWallet helps students organize their expenses, track spending, and develop better budgeting habits. Manage your money easily, all in one place.
+        </p>
+
+        <div class="hero-buttons">
+
+          <a href="/expenses/new" class="btn btn-primary">
+            + Add Expense
+          </a>
+
+          <a href="/expenses" class="btn btn-secondary">
+            View Dashboard
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="hero-card">
+
+        <div class="card-icon">💳</div>
+
+        <h2>Track Your Expenses</h2>
+
+        <p>
+          Food, transportation, school supplies, and more. Keep all your expenses organized.
+        </p>
+
+        <div class="card-features">
+          <div>✓ Record daily expenses</div>
+          <div>✓ Organize spending categories</div>
+          <div>✓ Monitor total spending</div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="features">
+
+      <h2>Why Use StudentWallet?</h2>
+
+      <div class="feature-container">
+
+        <article class="feature-card">
+          <div class="feature-icon">💰</div>
+          <h3>Track Expenses</h3>
+          <p>Record and organize everyday purchases.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>View Spending</h3>
+          <p>See your expenses in one dashboard.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">🎓</div>
+          <h3>Made for Students</h3>
+          <p>Manage student expenses easily.</p>
+        </article>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 StudentWallet | INFR3120 Project</p>
+  </footer>
+
+</body>
 </html>
