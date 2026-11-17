@@ -1,12 +1,85 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>My Expenses - StudentWallet</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Expenses - StudentWallet</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
+
 <body>
-    <h1>My Expenses</h1>
-    <p>Your expense dashboard will appear here.</p>
-    <a href="/">Back to Home</a>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="/images/studentwallet-logo.png"
+           alt="StudentWallet Logo"
+           class="brand-logo">
+      <span>StudentWallet</span>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/expenses">Dashboard</a></li>
+      <li><a href="/expenses/new">Add Expense</a></li>
+    </ul>
+  </nav>
+
+  <main class="expenses-page">
+    <div class="expenses-header">
+      <div>
+        <h1>My Expenses</h1>
+        <p>Track and manage your spending in one place.</p>
+      </div>
+
+      <a href="/expenses/new" class="expense-add-btn">
+        + Add Expense
+      </a>
+    </div>
+
+    <div class="expenses-card">
+      <% if (expenses.length === 0) { %>
+        <div class="expenses-empty">
+          <h2>No expenses yet</h2>
+          <p>Start tracking by adding your first expense.</p>
+          <a href="/expenses/new">Add Your First Expense</a>
+        </div>
+      <% } else { %>
+        <div class="expenses-table-wrap">
+          <table class="expenses-table">
+            <thead>
+              <tr>
+                <th>Expense</th>
+                <th>Amount</th>
+                <th>Category</th>
+                <th>Date</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% expenses.forEach(function(expense) { %>
+                <tr>
+                  <td><strong><%= expense.name %></strong></td>
+                  <td class="expense-amount">
+                    $<%= expense.amount.toFixed(2) %>
+                  </td>
+                  <td>
+                    <span class="category-badge">
+                      <%= expense.category %>
+                    </span>
+                  </td>
+                  <td><%= expense.date %></td>
+                  <td><%= expense.description || '-' %></td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      <% } %>
+    </div>
+
+    <a href="/" class="expenses-back-link">← Back to Home</a>
+  </main>
 </body>
 </html>
