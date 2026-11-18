@@ -3,32 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Expenses - StudentWallet</title>
+  <title>Dashboard | StudentWallet</title>
   <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
 <body>
-  <!-- Navigation Bar -->
-  <nav class="navbar">
-    <div class="logo">
-      <img src="/images/studentwallet-logo.png"
-           alt="StudentWallet Logo"
-           class="brand-logo">
-      <span>StudentWallet</span>
-    </div>
 
-    <ul class="nav-links">
-      <li><a href="/">Home</a></li>
-      <li><a href="/expenses">Dashboard</a></li>
-      <li><a href="/expenses/new">Add Expense</a></li>
-    </ul>
-  </nav>
+  <header>
+    <nav class="navbar">
+      <a href="/" class="logo">
+        <img
+          src="/images/studentwallet-logo.png"
+          alt="StudentWallet Logo"
+          class="brand-logo"
+        >
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/expenses">Dashboard</a></li>
+        <li><a href="/expenses/new">Add Expense</a></li>
+      </ul>
+    </nav>
+  </header>
 
   <main class="expenses-page">
+
     <div class="expenses-header">
       <div>
-        <h1>My Expenses</h1>
-        <p>Track and manage your spending in one place.</p>
+        <h1>Expense Dashboard</h1>
+        <p>View and manage your student expenses.</p>
       </div>
 
       <a href="/expenses/new" class="expense-add-btn">
@@ -36,30 +40,57 @@
       </a>
     </div>
 
-    <!-- Total Spending -->
-    <div class="expenses-card">
-      <%
-        const total = expenses.reduce(function(sum, expense) {
-          return sum + Number(expense.amount);
-        }, 0);
-      %>
-      <h2>Total Spending: $<%= total.toFixed(2) %></h2>
-    </div>
+    <%
+      const totalSpending = expenses.reduce(
+        (total, expense) => total + Number(expense.amount),
+        0
+      );
 
-    <!-- Expenses Table -->
-    <div class="expenses-card">
+      const totalExpenses = expenses.length;
+
+      const highestExpense = expenses.length > 0
+        ? Math.max(...expenses.map(e => Number(e.amount)))
+        : 0;
+    %>
+
+    <section class="dashboard-stats">
+
+      <div class="stat-card">
+        <h3>Total Spending</h3>
+        <p>$<%= totalSpending.toFixed(2) %></p>
+      </div>
+
+      <div class="stat-card">
+        <h3>Total Expenses</h3>
+        <p><%= totalExpenses %></p>
+      </div>
+
+      <div class="stat-card">
+        <h3>Highest Expense</h3>
+        <p>$<%= highestExpense.toFixed(2) %></p>
+      </div>
+
+    </section>
+
+    <section class="expenses-card">
+      <h2>Expense History</h2>
+
       <% if (expenses.length === 0) { %>
+
         <div class="expenses-empty">
-          <h2>No expenses yet</h2>
-          <p>Start tracking by adding your first expense.</p>
+          <h3>No expenses recorded yet.</h3>
+          <p>Start tracking your spending today!</p>
           <a href="/expenses/new">Add Your First Expense</a>
         </div>
+
       <% } else { %>
+
         <div class="expenses-table-wrap">
           <table class="expenses-table">
+
             <thead>
               <tr>
-                <th>Expense</th>
+                <th>Expense Name</th>
                 <th>Amount</th>
                 <th>Category</th>
                 <th>Date</th>
@@ -70,11 +101,9 @@
             <tbody>
               <% expenses.forEach(function(expense) { %>
                 <tr>
-                  <td>
-                    <strong><%= expense.name %></strong>
-                  </td>
+                  <td><%= expense.name %></td>
 
-                  <td class="expense-amount">
+                  <td>
                     $<%= Number(expense.amount).toFixed(2) %>
                   </td>
 
@@ -85,7 +114,10 @@
                   </td>
 
                   <td>
-                    <%= new Date(expense.date).toLocaleDateString('en-CA', { timeZone: 'UTC' }) %>
+                    <%= new Date(expense.date).toLocaleDateString(
+                      'en-CA',
+                      { timeZone: 'UTC' }
+                    ) %>
                   </td>
 
                   <td>
@@ -94,12 +126,18 @@
                 </tr>
               <% }); %>
             </tbody>
+
           </table>
         </div>
-      <% } %>
-    </div>
 
-    <a href="/" class="expenses-back-link">← Back to Home</a>
+      <% } %>
+    </section>
+
   </main>
+
+  <footer>
+    <p>&copy; 2026 StudentWallet | INFR3120 Project</p>
+  </footer>
+
 </body>
 </html>
